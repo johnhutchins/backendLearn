@@ -1,5 +1,8 @@
 import express from "express"
+import { DataStore } from "./data/data"
 const app = express()
+
+console.log('DATASOURCE tours === '+DataStore.tours)
 
 app.get('/',(req,res,next)=>{
     res.send("GET REQUEST\nJohn's Backend API, v1")

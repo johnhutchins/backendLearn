@@ -4,7 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const data_1 = require("./data/data");
 const app = express_1.default();
+console.log('DATASOURCE tours === ' + data_1.DataStore.tours);
 app.get('/', (req, res, next) => {
     res.send("GET REQUEST\nJohn's Backend API, v1");
 });
