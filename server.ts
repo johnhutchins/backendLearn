@@ -1,12 +1,12 @@
 import express from "express"
-import { DataStore } from "./data/data"
 const app = express()
+
+import { DataStore } from "./data/data"
+import { apiGetTours } from "./api/tours/apiGetTours"
 
 console.log(JSON.parse(JSON.stringify(DataStore.tours)))
 
-app.get('/',(req,res,next)=>{
-    res.send("GET REQUEST\nJohn's Backend API, v1")
-})
+app.get('/', apiGetTours)
 
 app.get('/tours', (req,res,next)=>{
     res.send(DataStore.tours)
