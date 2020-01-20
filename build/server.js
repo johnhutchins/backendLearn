@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const data_1 = require("./data/data");
 const app = express_1.default();
-console.log('DATASOURCE tours === ' + data_1.DataStore.tours);
+console.log(JSON.stringify(data_1.DataStore.tours));
 app.get('/', (req, res, next) => {
     res.send("GET REQUEST\nJohn's Backend API, v1");
 });
