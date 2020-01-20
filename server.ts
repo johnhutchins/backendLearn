@@ -3,6 +3,7 @@ const app = express()
 
 import * as bodyparser from "body-parser"
 const jsonParser = bodyparser.json()
+const urlEncodedParser = bodyparser.urlencoded({extended: true})
 
 import { apiGetTours } from "./api/tours/apiGetTours"
 import { apiGetTourDetail } from "./api/tours/apiGetTourDetail"
@@ -12,18 +13,8 @@ import { apiUpdateTour } from "./api/tours/apiUpdateTour"
 
 import { CustomRequestHandler } from "./model/express"
 
-const authenticator: CustomRequestHandler = (req,res,next)=>{
-    console.log(new Date() + ' - ' + req.method + " Request to " + req.path)
-    next()
-}
-
-//console.log(JSON.parse(JSON.stringify(DataStore.tours)))
-const logger: CustomRequestHandler = (req,res,next)=>{
-    console.log(new Date() + ' - ' + req.method + " Request to " + req.path)
-    next()
-}
-
-app.use(authenticator)
+import morgan from "morgan"
+const logger = morgan("dev")
 
 app.use(logger)
 
