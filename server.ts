@@ -9,7 +9,7 @@ console.log(JSON.parse(JSON.stringify(DataStore.tours)))
 
 app.get('/', apiGetTours)
 
-app.get('/tours:id',apiGetTourDetail)
+app.get('/tours/:id',apiGetTourDetail)
 
 //app.post('/tours:id',apiGetTourDetail)
 
