@@ -6,8 +6,9 @@ exports.apiGetTourDetail = (req, res, next) => {
     const tourID = req.params.id;
     const selectedTour = data_1.DataStore.tours.find((element) => element.id == tourID);
     if (selectedTour) {
+        const imageUrls = selectedTour.img;
         const selectedReviews = data_1.DataStore.reviews.filter((item) => item.tourID == tourID);
-        res.json(new TourDetail_1.TourDetail(selectedTour, selectedReviews));
+        res.json(new TourDetail_1.TourDetail(selectedTour, selectedReviews, imageUrls));
     }
     else {
         res.json({ "status": "failed", "message": "Element not found" });

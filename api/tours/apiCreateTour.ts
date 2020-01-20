@@ -3,7 +3,6 @@ import uuid from "uuid/v4"
 import { DataStore } from "../../data/data";
 
 export const apiCreateTour: RequestHandler = (req,res,next)=>{
-    console.log("REQUEST === ", req.body)
     const newTour = {
         id: uuid(),
         location: req.body.location || "",
@@ -11,9 +10,10 @@ export const apiCreateTour: RequestHandler = (req,res,next)=>{
         tourCategory: req.body.tourCategory || "",
         tourDescription: req.body.tourDescription || "",
         price: req.body.price || 0,
-        currency: req.body.currency || ""
+        currency: req.body.currency || "",
+        img: []
     }
     DataStore.tours.push(newTour)
     //res.send("New tour added!")
-    res.send(newTour)
+    res.send("NEW TOUR = "+newTour)
 }
