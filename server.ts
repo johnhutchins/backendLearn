@@ -1,17 +1,20 @@
 import express from "express"
 const app = express()
 
-import { DataStore } from "./data/data"
+import * as bodyparser from "body-parser"
+const jsonParser = bodyparser.json()
+
 import { apiGetTours } from "./api/tours/apiGetTours"
 import { apiGetTourDetail } from "./api/tours/apiGetTourDetail"
+import { apiCreateTour } from "./api/tours/apiCreateTour"
 
-console.log(JSON.parse(JSON.stringify(DataStore.tours)))
+//console.log(JSON.parse(JSON.stringify(DataStore.tours)))
 
-app.get('/', apiGetTours)
+app.get('/tours', apiGetTours)
 
 app.get('/tours/:id',apiGetTourDetail)
 
-//app.post('/tours:id',apiGetTourDetail)
+app.post('/tours',jsonParser, apiCreateTour)
 
 app.listen(process.env.PORT || 8091, () =>{
     console.log("Server started")
