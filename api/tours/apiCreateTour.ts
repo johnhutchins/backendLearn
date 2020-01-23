@@ -1,8 +1,15 @@
 import { RequestHandler } from "express"
 import uuid from "uuid/v4"
 import { DataStore } from "../../data/data";
+import { apiErrorHandler } from "../general/errorHandling";
+import { APIError, PublicInfo } from "../../model/messages"
 
 export const apiCreateTour: RequestHandler = (req,res,next)=>{
+    const requiredFields = ['tourTitle','location']
+    const givenFields = Object.getOwnPropertyNames(req.body)
+    if(!requiredFields.every(field => givenFields.includes(field))){
+        return next(new APIError("Data missing","Not all required fields are available",400))
+    }
     const newTour = {
         id: uuid(),
         location: req.body.location || "",
@@ -14,6 +21,5 @@ export const apiCreateTour: RequestHandler = (req,res,next)=>{
         img: []
     }
     DataStore.tours.push(newTour)
-    //res.send("New tour added!")
-    res.send("NEW TOUR = "+newTour)
+    res.json(new PublicInfo('Tour added',200,{tour: newTour}))
 }
